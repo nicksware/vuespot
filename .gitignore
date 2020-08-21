@@ -1,7 +1,11 @@
 .DS_Store
 node_modules
 /dist
-
+aur/pkg/
+aur/src/
+aur/SBFspot
+favorites.json
+config.json
 
 # local env files
 .env.local
@@ -21,3 +25,15 @@ pnpm-debug.log*
 *.njsproj
 *.sln
 *.sw?
+
+### ArchLinuxPackages
+*.tar
+*.tar.*
+*.jar
+*.exe
+*.msi
+*.zip
+*.tgz
+*.log
+*.log.*
+*.sig

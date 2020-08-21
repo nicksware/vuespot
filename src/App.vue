@@ -1,56 +1,62 @@
 <template>
   <v-app>
-    <v-app-bar app color="primary" dark>
-      <div class="d-flex align-center">
-        <v-img
-          alt="Vuetify Logo"
-          class="shrink mr-2"
-          contain
-          src="https://cdn.vuetifyjs.com/images/logos/vuetify-logo-dark.png"
-          transition="scale-transition"
-          width="40"
-        />
+    <v-container fluid>
+      <v-tabs centered center-active show-arrows>
+        <v-tab> <v-icon>mdi-calendar-today</v-icon>Day </v-tab>
+        <v-tab> <v-icon>mdi-calendar-month</v-icon>Month </v-tab>
+        <v-tab> <v-icon>mdi-calendar-range</v-icon>Years </v-tab>
+        <v-tab> <v-icon>mdi-bell</v-icon>Event </v-tab>
+        <v-tab> <v-icon>mdi-flash</v-icon>Inverter </v-tab>
 
-        <v-img
-          alt="Vuetify Name"
-          class="shrink mt-1 hidden-sm-and-down"
-          contain
-          min-width="100"
-          src="https://cdn.vuetifyjs.com/images/logos/vuetify-name-dark.png"
-          width="100"
-        />
-      </div>
+        <v-tab-item>
+          <Day />
+        </v-tab-item>
+        <v-tab-item>
+          <Month />
+        </v-tab-item>
+        <v-tab-item>
+          <Years />
+        </v-tab-item>
+        <v-tab-item>
+          <Event />
+        </v-tab-item>
+        <v-tab-item>
+          <Inverter />
+        </v-tab-item>
+      </v-tabs>
+    </v-container>
 
-      <v-spacer></v-spacer>
+    <v-bottom-navigation grow height="100%">
+      <Favorites />
+    </v-bottom-navigation>
 
-      <v-btn
-        href="https://github.com/vuetifyjs/vuetify/releases/latest"
-        target="_blank"
-        text
-      >
-        <span class="mr-2">Latest Release</span>
-        <v-icon>mdi-open-in-new</v-icon>
-      </v-btn>
-    </v-app-bar>
-
-    <v-main>
-      <HelloWorld />
-    </v-main>
+    <Footer />
+    <Dialog />
   </v-app>
 </template>
 
 <script>
-import HelloWorld from "./components/HelloWorld";
+/*! This work is licensed under the Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License. To view a copy of this license, visit http://creativecommons.org/licenses/by-nc-sa/3.0/ or send a letter to Creative Commons, PO Box 1866, Mountain View, CA 94042, USA. */
+
+import store from "@/store";
 
 export default {
   name: "App",
-
   components: {
-    HelloWorld
+    Day: () => import("@/components/Day"),
+    Event: () => import("@/components/Event"),
+    Inverter: () => import("@/components/Inverter"),
+    Month: () => import("@/components/Month"),
+    Favorites: () => import("@/components/Favorites"),
+    Years: () => import("@/components/Years"),
+    Footer: () => import("@/components/Footer"),
+    Dialog: () => import("@/components/Dialog"),
   },
-
-  data: () => ({
-    //
-  })
+  created: () => {
+    setTimeout(() => {
+      if (store.state.api.debug) console.log("initialize application...");
+      store.dispatch("init");
+    }, 2500);
+  },
 };
 </script>

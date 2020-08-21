@@ -1,40 +1,50 @@
 {
   "name": "vuespot",
   "version": "0.1.0",
-  "private": true,
+  "license": "CC BY-NC-SA 3.0",
+  "author": {
+    "name": "noobping",
+    "email": "noobping@users.noreply.github.com",
+    "url": "https://github.com/noobping/vuespot"
+  },
   "scripts": {
-    "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint"
+    "serve": "parallel --ungroup ::: 'vue-cli-service serve --mode=development' 'cd api && php -S 127.0.0.1:8000 index.php'",
+    "build": "vue-cli-service build --mode=production && cp -R api dist/api",
+    "lint": "vue-cli-service lint",
+    "update": "ncu -u"
   },
   "dependencies": {
-    "@mdi/font": "^3.6.95",
+    "@mdi/font": "^5.5.55",
+    "axios": "^0.19.2",
     "core-js": "^3.6.5",
     "register-service-worker": "^1.7.1",
     "roboto-fontface": "*",
     "vue": "^2.6.11",
-    "vuetify": "^2.2.11"
+    "vue-plotly": "^1.1.0",
+    "vuetify": "^2.3.9",
+    "vuex": "^3.5.1",
+    "vuex-persist": "^2.2.0"
   },
   "devDependencies": {
-    "@vue/cli-plugin-babel": "~4.5.0",
-    "@vue/cli-plugin-eslint": "~4.5.0",
-    "@vue/cli-plugin-pwa": "~4.5.0",
-    "@vue/cli-service": "~4.5.0",
+    "@vue/cli-plugin-babel": "^4.5.4",
+    "@vue/cli-plugin-eslint": "~4.5.4",
+    "@vue/cli-plugin-pwa": "^4.5.4",
+    "@vue/cli-plugin-vuex": "^4.5.4",
+    "@vue/cli-service": "^4.5.4",
     "@vue/eslint-config-prettier": "^6.0.0",
     "babel-eslint": "^10.1.0",
-    "eslint": "^6.7.2",
-    "eslint-plugin-prettier": "^3.1.3",
+    "eslint": "^7.7.0",
+    "eslint-plugin-prettier": "^3.1.4",
     "eslint-plugin-vue": "^6.2.2",
-    "lint-staged": "^9.5.0",
-    "prettier": "^1.19.1",
-    "sass": "^1.26.5",
-    "sass-loader": "^8.0.2",
+    "lint-staged": "^10.2.11",
+    "npm-check-updates": "^7.1.1",
+    "prettier": "^2.0.5",
+    "sass": "^1.26.10",
+    "sass-loader": "^9.0.3",
     "vue-cli-plugin-vuetify": "~2.0.7",
+    "vue-cli-plugin-webpack-bundle-analyzer": "~2.0.0",
     "vue-template-compiler": "^2.6.11",
-    "vuetify-loader": "^1.3.0"
-  },
-  "gitHooks": {
-    "pre-commit": "lint-staged"
+    "vuetify-loader": "^1.6.0"
   },
   "lint-staged": {
     "*.{js,jsx,vue}": [
