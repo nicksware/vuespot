@@ -58,3 +58,12 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+.v-input {
+  padding-bottom: 0;
+  padding-top: 3em;
+  padding-left: 1em;
+  padding-right: 1em;
+}
+</style>
