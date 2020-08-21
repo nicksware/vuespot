@@ -20,7 +20,6 @@
     "register-service-worker": "^1.7.1",
     "roboto-fontface": "*",
     "vue": "^2.6.11",
-    "vue-plotly": "^1.1.0",
     "vuetify": "^2.3.9",
     "vuex": "^3.5.1",
     "vuex-persist": "^2.2.0"
