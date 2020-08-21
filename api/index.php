@@ -66,6 +66,7 @@ class App
             array_shift($this->param);
             $arr = explode('/', $tmp);
             $class = "\\endpoint\\" . ucfirst($arr[0]);
+            array_shift($arr);
             $this->param = array_merge((array)$this->param, (array)$arr);
         }
 
