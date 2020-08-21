@@ -6,5 +6,6 @@
     "host": "localhost"
   },
   "serial": "",
-  "crossDomain": false
+  "crossDomain": false,
+  "maxItemsInPage": 10
 }

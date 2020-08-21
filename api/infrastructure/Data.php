@@ -14,7 +14,7 @@ declare(strict_types=1);
 
 namespace infrastructure;
 
-use model\Max;
+use model\AppConfig;
 
 class Data extends DatabaseConnection
 {
@@ -86,7 +86,7 @@ class Data extends DatabaseConnection
             FROM EventData 
             WHERE Serial LIKE '$serial' 
             ORDER By TimeStamp DESC
-            LIMIT $page, " . Max::event() . ";";
+            LIMIT $page, " . AppConfig::max() . ";";
         if ($d = $this->mysqli->query($q)) {
             while ($obj = $d->fetch_object()) {
                 $r[] = $obj;

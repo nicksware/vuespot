@@ -34,6 +34,11 @@ class AppConfig extends Config
         return property_exists(AppConfig::config(), 'serial') ? strval(AppConfig::config()->serial) : "";
     }
 
+    public static function max(): int
+    {
+        return property_exists(AppConfig::config(), 'maxItemsInPage') ? AppConfig::config()->maxItemsInPage : 5;
+    }
+
     public static function cors(): bool
     {
         return property_exists(AppConfig::config(), 'crossDomain') ? AppConfig::config()->crossDomain : false;
