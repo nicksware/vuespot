@@ -9,29 +9,29 @@
         <v-tab> <v-icon>mdi-flash</v-icon>Inverter </v-tab>
 
         <v-tab-item>
-          <Day />
+          <Day></Day>
         </v-tab-item>
         <v-tab-item>
-          <Month />
+          <Month></Month>
         </v-tab-item>
         <v-tab-item>
-          <Years />
+          <Years></Years>
         </v-tab-item>
         <v-tab-item>
-          <Event />
+          <Event></Event>
         </v-tab-item>
         <v-tab-item>
-          <Inverter />
+          <Inverter></Inverter>
         </v-tab-item>
       </v-tabs>
     </v-container>
 
     <v-bottom-navigation grow height="100%">
-      <Favorites />
+      <Favorites></Favorites>
     </v-bottom-navigation>
 
-    <Footer />
-    <Dialog />
+    <Footer></Footer>
+    <Dialog></Dialog>
   </v-app>
 </template>
 

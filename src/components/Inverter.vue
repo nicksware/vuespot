@@ -1,6 +1,6 @@
 <template>
   <v-skeleton-loader class="mt-5 mx-auto" type="card" :loading="loading">
-    <Scroll />
+    <Scroll></Scroll>
 
     <table class="table" id="inverter">
       <tr v-for="(v, k) in inverter" :key="k">

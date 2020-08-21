@@ -14,8 +14,6 @@
 
     <v-spacer></v-spacer>
 
-    <v-card> </v-card>
-
     <v-btn
       text
       rel="license"

@@ -1,6 +1,6 @@
 <template>
   <v-skeleton-loader class="mt-5 mx-auto" type="table" :loading="loading">
-    <Scroll />
+    <Scroll></Scroll>
 
     <v-data-table
       id="event"
