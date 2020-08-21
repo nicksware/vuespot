@@ -14,6 +14,7 @@ function getRandomArbitrary(min, max) {
 export default new Vuex.Store({
   state: {
     app: {
+      date: new Date().toISOString().substr(0, 10),
       dialog: false,
       url: "",
       secure: false,
@@ -97,15 +98,18 @@ export default new Vuex.Store({
     secureapi(state, enable) {
       state.app.secure = enable;
     },
+    date(state, date) {
+      state.app.date = date;
+    },
     loading(state) {
       Object.keys(state.loading).map(function (key) {
-        state.loading[key] = true;
+        if (!state.loading[key]) state.loading[key] = true;
       });
     },
     loadingByKey(state, key) {
       state.loading[key] = true;
     },
-    init(state, { key, value }) {
+    get(state, { key, value }) {
       if (state.api[key] !== undefined) {
         state.api[key] = value;
         if (state.loading[key])
@@ -133,45 +137,49 @@ export default new Vuex.Store({
     },
   },
   actions: {
-    init({ commit, state }) {
+    get_all({ dispatch, commit, state }) {
       commit("loading");
+      commit("date", new Date().toISOString().substr(0, 10));
       const keys = Object.keys(state.api);
-      keys.forEach((key) =>
-        setTimeout(() => {
-          const url =
-            (state.app.url
-              ? (state.app.secure ? "https://" : "http://") + state.app.url
-              : "") +
-            "/api/?r=" +
-            key;
-          if (state.api.debug) console.log("load " + url);
+      keys.forEach((key) => dispatch("get", { key }));
+    },
+    get({ commit, state }, { key, arg }) {
+      setTimeout(() => {
+        if (!state.loading[key]) commit("loadingByKey", key);
 
-          axios
-            .get(url, {
-              crossDomain: state.app.url ? true : false,
-            })
-            .then((res) => {
-              if (res.status == 200 && res.data.error !== undefined)
-                console.error(res.data.error.message, res.data.error);
-              if (res.status == 200 && res.data[key] !== undefined)
-                commit("init", {
-                  key: key,
-                  value: res.data[key],
-                });
-              else if (res.status == 200 && res.data[key + "s"] !== undefined)
-                commit("init", {
-                  key: key,
-                  value: res.data[key + "s"],
-                });
-              else
-                commit("init", {
-                  key: key,
-                  value: res.data,
-                });
-            })
-            .catch(() => commit("show_dialog"));
-        }, getRandomArbitrary(500, 1000))
-      );
+        const url =
+          (state.app.url
+            ? (state.app.secure ? "https://" : "http://") + state.app.url
+            : "") +
+          "/api/?r=" +
+          (arg ? key + "/" + arg : key);
+        if (state.api.debug) console.log("load " + url);
+
+        axios
+          .get(url, {
+            crossDomain: state.app.url ? true : false,
+          })
+          .then((res) => {
+            if (res.status == 200 && res.data.error !== undefined)
+              console.error(res.data.error.message, res.data.error);
+            if (res.status == 200 && res.data[key] !== undefined)
+              commit("get", {
+                key: key,
+                value: res.data[key],
+              });
+            else if (res.status == 200 && res.data[key + "s"] !== undefined)
+              commit("get", {
+                key: key,
+                value: res.data[key + "s"],
+              });
+            else
+              commit("get", {
+                key: key,
+                value: res.data,
+              });
+          })
+          .catch(() => commit("show_dialog"));
+      }, getRandomArbitrary(500, 1000));
     },
   },
 });
