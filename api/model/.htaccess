@@ -1,0 +1,4 @@
+
+Options -Indexes
+allow from 127.0.0.1
+deny from all
