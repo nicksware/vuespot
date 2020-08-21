@@ -6,7 +6,6 @@
       id="event"
       :headers="headers"
       :items="event"
-      :items-per-page="Math.min(page * 10, 30)"
       class="elevation"
     ></v-data-table>
     <v-btn pill block color="primary" v-on:click="add()">
