@@ -48,8 +48,11 @@ export default {
       },
       set(n) {
         store.commit("date", n);
-        store.commit("loadingByKey", "day");
-        store.dispatch("get", { key: "day", arg: n });
+        store.commit("loadingByKey", this.type == "month" ? "month" : "day");
+        store.dispatch("get", {
+          key: this.type == "month" ? "month" : "day",
+          arg: n,
+        });
       },
     },
   },
