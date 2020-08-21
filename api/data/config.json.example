@@ -1,0 +1,10 @@
+{
+  "database": {
+    "name": "test",
+    "user": "root",
+    "password": "",
+    "host": "localhost"
+  },
+  "serial": "",
+  "crossDomain": false
+}
