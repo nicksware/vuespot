@@ -55,7 +55,7 @@ export default {
   created: () => {
     setTimeout(() => {
       if (store.state.api.debug) console.log("initialize application...");
-      store.dispatch("init");
+      store.dispatch("get_all");
     }, 2500);
   },
 };

@@ -69,7 +69,7 @@ export default {
     reload() {
       if (store.state.api.debug) console.log("reload application...");
       this.dialog = false;
-      store.dispatch("init");
+      store.dispatch("get_all");
     },
   },
 };
