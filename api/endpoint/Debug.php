@@ -30,6 +30,6 @@ class Debug
     public function cli()
     {
         header('Content-Type: application/text');
-        die("Debug " . AppConfig::debug() ? "enabled" : "disabled");
+        die("Debug " . (AppConfig::debug() ? "enabled" : "disabled"));
     }
 }
