@@ -24,7 +24,6 @@ export default new Vuex.Store({
       event: false,
       inverter: false,
       month: false,
-      favorites: false,
       year: false,
     },
     api: {
@@ -33,7 +32,6 @@ export default new Vuex.Store({
       event: [],
       inverter: [],
       month: [],
-      favorites: {},
       year: [],
     },
   },

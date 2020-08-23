@@ -26,10 +26,6 @@
       </v-tabs>
     </v-container>
 
-    <v-bottom-navigation grow height="100%">
-      <Favorites></Favorites>
-    </v-bottom-navigation>
-
     <Footer></Footer>
     <Dialog></Dialog>
   </v-app>
@@ -47,7 +43,6 @@ export default {
     Event: () => import("@/components/Event"),
     Inverter: () => import("@/components/Inverter"),
     Month: () => import("@/components/Month"),
-    Favorites: () => import("@/components/Favorites"),
     Years: () => import("@/components/Years"),
     Footer: () => import("@/components/Footer"),
     Dialog: () => import("@/components/Dialog"),
