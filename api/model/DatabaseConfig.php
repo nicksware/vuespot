@@ -23,12 +23,7 @@ class DatabaseConfig extends Config
         if (self::$instance == null) {
             self::$instance = new DatabaseConfig();
         }
-        return self::$instance->vallid('database') ? self::$instance->config->database : (object) [
-            "host" => "localhost",
-            "name" => "test",
-            "user" => "root",
-            "password" => ""
-        ];
+        return self::$instance->vallid('database') ? self::$instance->config->database : (object) [];
     }
 
     public static function host(): string

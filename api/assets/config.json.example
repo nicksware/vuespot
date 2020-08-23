@@ -5,7 +5,9 @@
     "password": "",
     "host": "localhost"
   },
-  "serial": "",
-  "crossDomain": false,
-  "maxItemsInPage": 10
+  "app": {
+    "serial": "",
+    "crossDomain": false,
+    "maxItemsInPage": 10
+  }
 }

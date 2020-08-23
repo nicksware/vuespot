@@ -21,12 +21,9 @@ class AppConfig extends Config
     protected static function config()
     {
         if (self::$instance == null) {
-            self::$instance = new DatabaseConfig();
+            self::$instance = new AppConfig();
         }
-        return self::$instance->vallid() ? self::$instance->config : (object) [
-            "serial" => "",
-            "debug" => AppConfig::auto_detect()
-        ];
+        return self::$instance->vallid('app') ? self::$instance->config : (object) [];
     }
 
     public static function serial(): string
@@ -47,10 +44,5 @@ class AppConfig extends Config
     public static function debug(): bool
     {
         return property_exists(AppConfig::config(), 'debug') ? AppConfig::config()->debug : AppConfig::auto_detect();
-    }
-
-    private static function auto_detect(): bool
-    {
-        return empty($_SERVER['SERVER_NAME']) || $_SERVER['SERVER_NAME'] == '127.0.0.1';
     }
 }
