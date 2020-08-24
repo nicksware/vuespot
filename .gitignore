@@ -6,6 +6,7 @@ aur/src/
 aur/SBFspot
 favorites.json
 config.json
+*.gnupg
 
 # local env files
 .env.local
