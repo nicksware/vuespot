@@ -23,7 +23,7 @@ class AppConfig extends Config
         if (self::$instance == null) {
             self::$instance = new AppConfig();
         }
-        return self::$instance->vallid('app') ? self::$instance->config : (object) [];
+        return self::$instance->vallid('app') ? self::$instance->config->app : (object) [];
     }
 
     public static function serial(): string
