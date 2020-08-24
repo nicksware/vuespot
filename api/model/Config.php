@@ -20,7 +20,7 @@ abstract class Config
 
     protected function __construct()
     {
-        $path = getcwd() . DIRECTORY_SEPARATOR . 'data' . DIRECTORY_SEPARATOR . 'config.json';
+        $path = getcwd() . DIRECTORY_SEPARATOR . 'assets' . DIRECTORY_SEPARATOR . 'config.json';
         if (file_exists($path)) {
             $json = file_get_contents($path);
             if (is_string($json) && !empty($json)) {
@@ -30,7 +30,8 @@ abstract class Config
         }
     }
 
-    protected function vallid(string $property = ""): bool {
+    protected function vallid(string $property = ""): bool
+    {
         return $this->config != null && (empty($property) ? true : property_exists($this->config, $property));
     }
 
