@@ -1,17 +1,27 @@
 <template>
-  <v-skeleton-loader class="mt-5 mx-auto" type="table" :loading="loading">
-    <Scroll></Scroll>
-
-    <v-data-table
-      id="event"
-      :headers="headers"
-      :items="event"
-      class="elevation"
-    ></v-data-table>
-    <v-btn pill block color="primary" v-on:click="add()">
-      <v-icon>mdi-plus</v-icon>More events
-    </v-btn>
-  </v-skeleton-loader>
+  <v-data-table
+    id="event"
+    :headers="headers"
+    :items="event"
+    :page.sync="page"
+    :rows-per-page="max"
+    :items-per-page="max"
+    :loading="loading"
+    loading-text="Loading... Please wait"
+    class="elevation"
+  >
+    <template v-slot:footer>
+      <v-pagination
+        block
+        v-model="page"
+        total-visible="7"
+        :length="
+          Math.max(more ? page + 1 : page, [].concat(event).length / max)
+        "
+        next="false"
+      ></v-pagination>
+    </template>
+  </v-data-table>
 </template>
 
 <script>
@@ -22,31 +32,39 @@ import store from "@/store";
 
 export default {
   name: "Event",
-  components: {
-    Scroll: () => import("@/components/ScrollToBottom"),
-  },
   data: () => ({
     page: 1,
+    pageCounter: 2,
+    more: true,
     headers: [
-      { value: "Category" },
-      { value: "EventCode" },
-      { value: "EventGroup" },
-      { value: "EventType" },
-      { value: "NewValue" },
-      { value: "OldValue" },
-      { value: "Tag" },
-      { value: "TimeStamp" },
+      { value: "Category", text: "Category" },
+      { value: "EventCode", text: "EventCode" },
+      { value: "EventGroup", text: "EventGroup" },
+      { value: "EventType", text: "EventType" },
+      { value: "NewValue", text: "NewValue" },
+      { value: "OldValue", text: "OldValue" },
+      { value: "Tag", text: "Tag" },
+      { value: "TimeStamp", text: "TimeStamp" },
     ],
   }),
   computed: {
     event() {
       return store.state.api.event;
     },
+    max() {
+      return store.state.api.max;
+    },
     loading() {
       return store.getters.isLoadingByKey("event");
     },
   },
   watch: {
+    page(n) {
+      console.log("new page", n);
+      if (!this.loading && n >= this.pageCounter) this.add();
+      else if (this.loading && n < this.pageCounter)
+        store.commit("cancelByKey", "event");
+    },
     event() {},
     loading() {},
   },
@@ -69,13 +87,18 @@ export default {
         .then((res) => {
           if (res.status == 200 && res.data.error)
             console.error(res.data.error.message, res.data.error);
+          this.more =
+            res.data.events &&
+            res.data.events.length &&
+            res.data.events.length > 0;
           if (res.status == 200 && res.data.events) {
             this.page++;
+            this.pageCounter++;
             store.commit("add", {
               key: "event",
               value: res.data.events,
             });
-          }
+          } else store.commit("cancelByKey", "event");
         })
         .catch(() => store.commit("show_dialog"));
     },
