@@ -1,7 +1,5 @@
 <template>
   <v-skeleton-loader class="mt-5 mx-auto" type="card" :loading="loading">
-    <Scroll></Scroll>
-
     <table class="table" id="inverter">
       <tr v-for="(v, k) in inverter" :key="k">
         <th scope="row">{{ k }}</th>
@@ -18,9 +16,6 @@ import store from "@/store";
 
 export default {
   name: "Inverter",
-  components: {
-    Scroll: () => import("@/components/ScrollToBottom"),
-  },
   computed: {
     inverter() {
       return store.state.api.inverter;

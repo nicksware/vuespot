@@ -1,8 +1,6 @@
 <template>
   <div>
     <v-skeleton-loader class="mt-5 mx-auto" type="card" :loading="loading">
-      <Scroll />
-
       <v-card flat>
         <v-card-title> {{ today / 1000 }} kWh </v-card-title>
         <v-sparkline
@@ -29,7 +27,6 @@ import store from "@/store";
 export default {
   name: "Day",
   components: {
-    Scroll: () => import("@/components/ScrollToBottom"),
     Date: () => import("@/components/Date"),
   },
   data: () => ({
