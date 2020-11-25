@@ -108,6 +108,9 @@ export default new Vuex.Store({
     loadingByKey(state, key) {
       state.loading[key] = true;
     },
+    cancelByKey(state, key) {
+      state.loading[key] = false;
+    },
     get(state, { key, value }) {
       if (state.api[key] !== undefined) {
         state.api[key] = value;
