@@ -78,6 +78,7 @@ class Data extends DatabaseConnection
 
     public function event(string $serial, int $page = 0): array
     {
+        $page = max(0, $page * 10);
         $r = array();
         $q =
             "SELECT 
