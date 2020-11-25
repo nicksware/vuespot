@@ -28,6 +28,7 @@ export default new Vuex.Store({
     },
     api: {
       debug: false,
+      max: 5,
       day: [],
       event: [],
       inverter: [],
